@@ -1,0 +1,66 @@
+# JwtLens
+
+JwtLens captures inbound and outbound JWT bearer tokens in ASP.NET Core apps and surfaces local diagnostics such as claims, expiry, and algorithm warnings. It is part of the [Lens family for .NET](https://github.com/AnilOptimizely/HttpLens/blob/main/docs/lens-family-architecture.md).
+
+## Install
+
+```shell
+dotnet add package JwtLens
+```
+
+## Minimal setup
+
+```csharp
+using JwtLens.Extensions;
+using JwtLens.Interceptors;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddJwtLens();
+
+// Optional: capture tokens sent by outbound HttpClient calls.
+builder.Services.AddHttpClient("outbound").AddHttpMessageHandler<JwtLensDelegatingHandler>();
+
+var app = builder.Build();
+
+app.UseJwtLens();
+
+app.Run();
+```
+
+To enable JwtLens only in specific environments, use the `AddJwtLens(builder.Environment, options => ...)` overload and set `JwtLensOptions.AllowedEnvironments`.
+
+## Repository layout
+
+| Path | Purpose |
+|---|---|
+| `src/JwtLens` | The `JwtLens` NuGet package. |
+| `tests/JwtLens.Tests` | Unit tests. |
+| `samples/JwtLens.Sample` | Minimal app that consumes the published `JwtLens` package. |
+| `docs/issues` | JwtLens design history. |
+
+## Building
+
+```shell
+dotnet restore
+dotnet build
+dotnet test
+```
+
+The SDK is pinned in `global.json`. Tests run on net9.0 and net10.0, so install those runtimes as well.
+
+## Dependencies and compatibility
+
+- JwtLens depends on the shared [`Lens.Abstractions`](https://www.nuget.org/packages/Lens.Abstractions) package, which lives in the [HttpLens repository](https://github.com/AnilOptimizely/HttpLens/tree/main/src/Lens.Abstractions).
+- HttpLens owns the compatibility suite that verifies HttpLens and JwtLens work together in one app.
+- Family-wide conventions (naming, versioning, shared contracts) are documented in the HttpLens repository: [architecture](https://github.com/AnilOptimizely/HttpLens/blob/main/docs/lens-family-architecture.md) and [package IDs](https://github.com/AnilOptimizely/HttpLens/blob/main/docs/package-id-decisions.md).
+
+## Releasing
+
+1. Update `<Version>` in `src/JwtLens/JwtLens.csproj`.
+2. After the release is published, update the `JwtLens` version in `Directory.Packages.props` so the sample uses it.
+3. Push a matching tag, for example `v0.2.0-preview.1`. The release workflow checks that the tag matches the version, runs the tests, and pushes only the JwtLens package to NuGet. It needs a `NUGET_API_KEY` repository secret.
+
+## License
+
+[MIT](LICENSE)
