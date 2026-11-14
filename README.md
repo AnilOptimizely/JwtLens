@@ -36,7 +36,7 @@ To enable JwtLens only in specific environments, use the `AddJwtLens(builder.Env
 |---|---|
 | `src/JwtLens` | The `JwtLens` NuGet package. |
 | `tests/JwtLens.Tests` | Unit tests. |
-| `samples/JwtLens.Sample` | Minimal app that consumes the published `JwtLens` package. |
+| `samples/JwtLens.Sample` | Minimal app showing the `AddJwtLens`/`UseJwtLens` setup. |
 | `docs/issues` | JwtLens design history. |
 
 ## Building
@@ -51,15 +51,14 @@ The SDK is pinned in `global.json`. Tests run on net9.0 and net10.0, so install 
 
 ## Dependencies and compatibility
 
-- JwtLens depends on the shared [`Lens.Abstractions`](https://www.nuget.org/packages/Lens.Abstractions) package, which lives in the [HttpLens repository](https://github.com/AnilOptimizely/HttpLens/tree/main/src/Lens.Abstractions).
+- JwtLens depends on the shared [`HttpLens.Abstractions`](https://www.nuget.org/packages/HttpLens.Abstractions) package (namespace `Lens.Abstractions`), which lives in the [HttpLens repository](https://github.com/AnilOptimizely/HttpLens/tree/main/src/Lens.Abstractions).
 - HttpLens owns the compatibility suite that verifies HttpLens and JwtLens work together in one app.
 - Family-wide conventions (naming, versioning, shared contracts) are documented in the HttpLens repository: [architecture](https://github.com/AnilOptimizely/HttpLens/blob/main/docs/lens-family-architecture.md) and [package IDs](https://github.com/AnilOptimizely/HttpLens/blob/main/docs/package-id-decisions.md).
 
 ## Releasing
 
 1. Update `<Version>` in `src/JwtLens/JwtLens.csproj`.
-2. After the release is published, update the `JwtLens` version in `Directory.Packages.props` so the sample uses it.
-3. Push a matching tag, for example `v0.2.0-preview.1`. The release workflow checks that the tag matches the version, runs the tests, and pushes only the JwtLens package to NuGet. It needs a `NUGET_API_KEY` repository secret.
+2. Push a matching tag, for example `v0.2.0-preview.1`. The release workflow checks that the tag matches the version, runs the tests, and pushes only the JwtLens package to NuGet. It needs a `NUGET_API_KEY` repository secret.
 
 ## License
 
