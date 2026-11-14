@@ -58,7 +58,7 @@ The SDK is pinned in `global.json`. Tests run on net9.0 and net10.0, so install 
 ## Releasing
 
 1. Update `<Version>` in `src/JwtLens/JwtLens.csproj`.
-2. Push a matching tag, for example `v0.2.0-preview.1`. The release workflow checks that the tag matches the version, runs the tests, and pushes only the JwtLens package to NuGet. It publishes with [NuGet Trusted Publishing](https://learn.microsoft.com/nuget/nuget-org/trusted-publishing): it needs a nuget.org trusted publishing policy for this repository and `release.yml`. No API key is stored.
+2. Push a matching tag, for example `v0.2.0`. The release workflow checks that the tag matches the version, runs the tests, and pushes only the JwtLens package to NuGet. It publishes with [NuGet Trusted Publishing](https://learn.microsoft.com/nuget/nuget-org/trusted-publishing): it needs a nuget.org trusted publishing policy for this repository and `release.yml`. No API key is stored.
 
 ## License
 

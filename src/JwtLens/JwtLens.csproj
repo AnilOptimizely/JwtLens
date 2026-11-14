@@ -7,7 +7,7 @@
     <Description>JWT inspection and diagnostics middleware for ASP.NET Core. Part of the Lens family for .NET.</Description>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <Version>0.2.0-preview.1</Version>
+    <Version>0.2.0</Version>
     <Title>JwtLens</Title>
   </PropertyGroup>
   <ItemGroup>
