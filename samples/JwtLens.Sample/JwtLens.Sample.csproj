@@ -4,6 +4,6 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="JwtLens" />
+    <ProjectReference Include="../../src/JwtLens/JwtLens.csproj" />
   </ItemGroup>
 </Project>
